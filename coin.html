@@ -1,0 +1,97 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clickable Coin Counter</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url('background-image.jpg') no-repeat center center fixed; /* Add your background image URL here */
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        background-color: red;
+    }
+    #coin-container {
+        position: relative;
+    }
+    #coin {
+        width: 100px;
+        height: 100px;
+        background-color: #ffd700;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 24px;
+        color: #000;
+    }
+    #count-box {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #000;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        font-size: 18px;
+        border-radius: 5px;
+    }
+    @keyframes moveNumber {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+    }
+    .number-animation {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: moveNumber 1s forwards;
+    }
+</style>
+</head>
+<body>
+
+<div id="count-box">Clicked: <span id="count">0</span></div>
+<div id="coin-container">
+    <div id="coin">xxx</div>
+</div>
+
+<script>
+    let clickCount = 0;
+    const coin = document.getElementById("coin");
+    const count = document.getElementById("count");
+
+    coin.addEventListener("click", function() {
+        clickCount++;
+        count.textContent = clickCount;
+
+        const numberAnimation = document.createElement('div');
+        numberAnimation.classList.add('number-animation');
+        numberAnimation.textContent = '+1';
+        document.body.appendChild(numberAnimation);
+
+        setTimeout(() => {
+            numberAnimation.remove();
+        }, 1000);
+    });
+</script>
+
+</body>
+</html>
